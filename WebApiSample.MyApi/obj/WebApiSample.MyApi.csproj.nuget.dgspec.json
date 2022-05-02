@@ -1,0 +1,371 @@
+{
+  "format": 1,
+  "restore": {
+    "G:\\workspace\\WebApiSample\\WebApiSample.MyApi\\WebApiSample.MyApi.csproj": {}
+  },
+  "projects": {
+    "G:\\workspace\\WebApiSample\\WebApiSample.Common\\WebApiSample.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\workspace\\WebApiSample\\WebApiSample.Common\\WebApiSample.Common.csproj",
+        "projectName": "WebApiSample.Common",
+        "projectPath": "G:\\workspace\\WebApiSample\\WebApiSample.Common\\WebApiSample.Common.csproj",
+        "packagesPath": "C:\\Users\\MrLost\\.nuget\\packages\\",
+        "outputPath": "G:\\workspace\\WebApiSample\\WebApiSample.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MrLost\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "G:\\workspace\\WebApiSample\\WebApiSample.Data\\WebApiSample.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\workspace\\WebApiSample\\WebApiSample.Data\\WebApiSample.Data.csproj",
+        "projectName": "WebApiSample.Data",
+        "projectPath": "G:\\workspace\\WebApiSample\\WebApiSample.Data\\WebApiSample.Data.csproj",
+        "packagesPath": "C:\\Users\\MrLost\\.nuget\\packages\\",
+        "outputPath": "G:\\workspace\\WebApiSample\\WebApiSample.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MrLost\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "G:\\workspace\\WebApiSample\\WebApiSample.Entities\\WebApiSample.Entities.csproj": {
+                "projectPath": "G:\\workspace\\WebApiSample\\WebApiSample.Entities\\WebApiSample.Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "G:\\workspace\\WebApiSample\\WebApiSample.Entities\\WebApiSample.Entities.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\workspace\\WebApiSample\\WebApiSample.Entities\\WebApiSample.Entities.csproj",
+        "projectName": "WebApiSample.Entities",
+        "projectPath": "G:\\workspace\\WebApiSample\\WebApiSample.Entities\\WebApiSample.Entities.csproj",
+        "packagesPath": "C:\\Users\\MrLost\\.nuget\\packages\\",
+        "outputPath": "G:\\workspace\\WebApiSample\\WebApiSample.Entities\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MrLost\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "G:\\workspace\\WebApiSample\\WebApiSample.Common\\WebApiSample.Common.csproj": {
+                "projectPath": "G:\\workspace\\WebApiSample\\WebApiSample.Common\\WebApiSample.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "G:\\workspace\\WebApiSample\\WebApiSample.MyApi\\WebApiSample.MyApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\workspace\\WebApiSample\\WebApiSample.MyApi\\WebApiSample.MyApi.csproj",
+        "projectName": "WebApiSample.MyApi",
+        "projectPath": "G:\\workspace\\WebApiSample\\WebApiSample.MyApi\\WebApiSample.MyApi.csproj",
+        "packagesPath": "C:\\Users\\MrLost\\.nuget\\packages\\",
+        "outputPath": "G:\\workspace\\WebApiSample\\WebApiSample.MyApi\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MrLost\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "G:\\workspace\\WebApiSample\\WebApiSample.WebFramework\\WebApiSample.WebFramework.csproj": {
+                "projectPath": "G:\\workspace\\WebApiSample\\WebApiSample.WebFramework\\WebApiSample.WebFramework.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "G:\\workspace\\WebApiSample\\WebApiSample.Services\\WebApiSample.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\workspace\\WebApiSample\\WebApiSample.Services\\WebApiSample.Services.csproj",
+        "projectName": "WebApiSample.Services",
+        "projectPath": "G:\\workspace\\WebApiSample\\WebApiSample.Services\\WebApiSample.Services.csproj",
+        "packagesPath": "C:\\Users\\MrLost\\.nuget\\packages\\",
+        "outputPath": "G:\\workspace\\WebApiSample\\WebApiSample.Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MrLost\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "G:\\workspace\\WebApiSample\\WebApiSample.Data\\WebApiSample.Data.csproj": {
+                "projectPath": "G:\\workspace\\WebApiSample\\WebApiSample.Data\\WebApiSample.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "G:\\workspace\\WebApiSample\\WebApiSample.WebFramework\\WebApiSample.WebFramework.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\workspace\\WebApiSample\\WebApiSample.WebFramework\\WebApiSample.WebFramework.csproj",
+        "projectName": "WebApiSample.WebFramework",
+        "projectPath": "G:\\workspace\\WebApiSample\\WebApiSample.WebFramework\\WebApiSample.WebFramework.csproj",
+        "packagesPath": "C:\\Users\\MrLost\\.nuget\\packages\\",
+        "outputPath": "G:\\workspace\\WebApiSample\\WebApiSample.WebFramework\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\MrLost\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "G:\\workspace\\WebApiSample\\WebApiSample.Services\\WebApiSample.Services.csproj": {
+                "projectPath": "G:\\workspace\\WebApiSample\\WebApiSample.Services\\WebApiSample.Services.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
