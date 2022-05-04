@@ -239,6 +239,15 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "Pluralize.NET/1.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Pluralize.NET.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Pluralize.NET.dll": {}
+        }
+      },
       "SQLitePCLRaw.bundle_e_sqlite3/2.0.6": {
         "type": "package",
         "dependencies": {
@@ -819,6 +828,22 @@
         "packageIcon.png"
       ]
     },
+    "Pluralize.NET/1.0.2": {
+      "sha512": "kr/sOAem5NPH7Ft0tNiaQOO7f/W7ExcLRERpgvg5BlVZimQ/d/MCxhnwnk+WL4dy5Bj/KjToHUl1azYYDfqzpA==",
+      "type": "package",
+      "path": "pluralize.net/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/Pluralize.NET.dll",
+        "lib/net451/Pluralize.NET.dll",
+        "lib/net46/Pluralize.NET.dll",
+        "lib/netstandard1.1/Pluralize.NET.dll",
+        "lib/netstandard2.0/Pluralize.NET.dll",
+        "pluralize.net.1.0.2.nupkg.sha512",
+        "pluralize.net.nuspec"
+      ]
+    },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.6": {
       "sha512": "zssYqiaucyGArZfg74rJuzK0ewgZiidsRVrZTmP7JLNvK806gXg6PGA46XzoJGpNPPA5uRcumwvVp6YTYxtQ5w==",
       "type": "package",
@@ -1105,7 +1130,8 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Microsoft.EntityFrameworkCore.Sqlite >= 6.0.4",
-      "Newtonsoft.Json >= 13.0.1"
+      "Newtonsoft.Json >= 13.0.1",
+      "Pluralize.NET >= 1.0.2"
     ]
   },
   "packageFolders": {
@@ -1154,6 +1180,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.1, )"
+          },
+          "Pluralize.NET": {
+            "target": "Package",
+            "version": "[1.0.2, )"
           }
         },
         "imports": [

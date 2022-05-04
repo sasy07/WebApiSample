@@ -1,0 +1,15 @@
+G:\workspace\WebApiSample\WebApiSample.Entities\bin\Debug\net6.0\WebApiSample.Entities.deps.json
+G:\workspace\WebApiSample\WebApiSample.Entities\bin\Debug\net6.0\WebApiSample.Entities.dll
+G:\workspace\WebApiSample\WebApiSample.Entities\bin\Debug\net6.0\WebApiSample.Entities.pdb
+G:\workspace\WebApiSample\WebApiSample.Entities\bin\Debug\net6.0\WebApiSample.Common.dll
+G:\workspace\WebApiSample\WebApiSample.Entities\bin\Debug\net6.0\WebApiSample.Common.pdb
+G:\workspace\WebApiSample\WebApiSample.Entities\obj\Debug\net6.0\WebApiSample.Entities.csproj.AssemblyReference.cache
+G:\workspace\WebApiSample\WebApiSample.Entities\obj\Debug\net6.0\WebApiSample.Entities.GeneratedMSBuildEditorConfig.editorconfig
+G:\workspace\WebApiSample\WebApiSample.Entities\obj\Debug\net6.0\WebApiSample.Entities.AssemblyInfoInputs.cache
+G:\workspace\WebApiSample\WebApiSample.Entities\obj\Debug\net6.0\WebApiSample.Entities.AssemblyInfo.cs
+G:\workspace\WebApiSample\WebApiSample.Entities\obj\Debug\net6.0\WebApiSample.Entities.csproj.CoreCompileInputs.cache
+G:\workspace\WebApiSample\WebApiSample.Entities\obj\Debug\net6.0\WebApiSample.Entities.csproj.CopyComplete
+G:\workspace\WebApiSample\WebApiSample.Entities\obj\Debug\net6.0\WebApiSample.Entities.dll
+G:\workspace\WebApiSample\WebApiSample.Entities\obj\Debug\net6.0\refint\WebApiSample.Entities.dll
+G:\workspace\WebApiSample\WebApiSample.Entities\obj\Debug\net6.0\WebApiSample.Entities.pdb
+G:\workspace\WebApiSample\WebApiSample.Entities\obj\Debug\net6.0\ref\WebApiSample.Entities.dll
