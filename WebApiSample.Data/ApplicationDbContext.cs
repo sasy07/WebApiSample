@@ -65,7 +65,8 @@ public class ApplicationDbContext:DbContext
         return base.SaveChanges(acceptAllChangesOnSuccess);
     }
 
-    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, 
+        CancellationToken cancellationToken = default)
     {
         _cleanString();
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
