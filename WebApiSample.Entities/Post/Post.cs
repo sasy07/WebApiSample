@@ -7,6 +7,6 @@ public class Post:BaseEntity<Guid>
     public int CategoryId { get; set; }
     public int AuthorId { get; set; }
 
-    public Category Category { get; set; }
-    public User Author { get; set; }
+    public Category? Category { get; set; }
+    public User? Author { get; set; }
 }

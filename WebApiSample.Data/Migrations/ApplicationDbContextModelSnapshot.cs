@@ -105,7 +105,7 @@ namespace WebApiSample.Data.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("LastLoginDate")
+                    b.Property<DateTimeOffset?>("LastLoginDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")

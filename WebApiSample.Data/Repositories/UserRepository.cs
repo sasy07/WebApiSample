@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApiSample.Common.Utility;
+using WebApiSample.Data.Contracts;
 using WebApiSample.Entities;
 
 namespace WebApiSample.Data.Repositories;
 
-public class UserRepository : Repository<User>
+public class UserRepository :Repository<User>,  IUserRepository
 {
     public UserRepository(ApplicationDbContext dbContext) : base(dbContext)
     {

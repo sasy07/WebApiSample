@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApiSample.Data.Migrations
 {
-    public partial class Initialdb : Migration
+    public partial class InitDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,7 +54,7 @@ namespace WebApiSample.Data.Migrations
                     Age = table.Column<int>(type: "INTEGER", nullable: false),
                     Gender = table.Column<int>(type: "INTEGER", nullable: false),
                     IsActive = table.Column<bool>(type: "INTEGER", nullable: false),
-                    LastLoginDate = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                    LastLoginDate = table.Column<DateTimeOffset>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

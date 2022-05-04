@@ -11,8 +11,8 @@ using WebApiSample.Data;
 namespace WebApiSample.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220504102648_Initial-db")]
-    partial class Initialdb
+    [Migration("20220504161526_Init-DB")]
+    partial class InitDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -107,7 +107,7 @@ namespace WebApiSample.Data.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("LastLoginDate")
+                    b.Property<DateTimeOffset?>("LastLoginDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
