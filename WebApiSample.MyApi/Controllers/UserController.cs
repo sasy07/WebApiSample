@@ -1,14 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApiSample.Data.Contracts;
-using WebApiSample.Data.Repositories;
 using WebApiSample.Entities;
+using WebApiSample.WebFramework.Api;
+using WebApiSample.WebFramework.Filters;
 
 namespace WebApiSample.MyApi.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
+[ApiResultFilter]
 public class UserController : ControllerBase
 {
+    
     #region constructor
 
     private readonly IUserRepository _userRepository;
@@ -23,25 +27,25 @@ public class UserController : ControllerBase
     #region CRUD
 
     [HttpGet]
-    public async Task<List<User>> Get(CancellationToken cancellationToken)
-    {
-        var users = await _userRepository.TableNoTracking.ToListAsync(cancellationToken);
-        return users;
-    }
+    public async Task<ActionResult<List<User>>> Get(CancellationToken cancellationToken)
+        => Ok(await _userRepository.TableNoTracking.ToListAsync(cancellationToken));
 
     [HttpGet("{id:int}")]
-    public async Task<ActionResult<User>> Get(int id,CancellationToken cancellationToken)
-        => await _userRepository.GetByIdAsync(cancellationToken, id);
+    public async Task<ApiResult<User>> Get(int id, CancellationToken cancellationToken)
+    {
+        var user = await _userRepository.GetByIdAsync(cancellationToken, id);
+        return user != null ? user : NotFound();
+    }
 
     [HttpPost]
-    public async Task Create(User user,CancellationToken cancellationToken)
+    public async Task<ApiResult<User>> Create(User user, CancellationToken cancellationToken)
     {
-        var a = 1111;
         await _userRepository.AddAsync(user, cancellationToken);
+        return Ok(user);
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(int id, User user,CancellationToken cancellationToken)
+    public async Task<ApiResult> Update(int id , User user, CancellationToken cancellationToken)
     {
         var updateUser = await _userRepository.GetByIdAsync(cancellationToken, id);
 
@@ -54,15 +58,18 @@ public class UserController : ControllerBase
         updateUser.LastLoginDate = user.LastLoginDate;
 
         await _userRepository.UpdateAsync(updateUser, cancellationToken);
+
         return Ok();
     }
 
     [HttpDelete]
-    public async Task<IActionResult> Delete(int id,CancellationToken cancellationToken)
+    public async Task<ApiResult> Delete(int id, CancellationToken cancellationToken)
     {
         var user = await _userRepository.GetByIdAsync(cancellationToken, id);
         await _userRepository.DeleteAsync(user, cancellationToken);
         return Ok();
     }
+
     #endregion
+    
 }
