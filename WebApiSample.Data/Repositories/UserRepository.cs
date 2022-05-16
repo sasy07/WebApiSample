@@ -17,4 +17,10 @@ public class UserRepository :Repository<User>,  IUserRepository
         return await Table.Where(p => p.UserName == userName && p.PasswordHash == passwordHash)
             .SingleOrDefaultAsync(cancellationToken);
     }
+
+    public Task AddAsync(User user, string password, CancellationToken cancellationToken)
+    {
+        user.PasswordHash = SecurityHelper.GetSha256Hash(password);
+        return base.AddAsync(user, cancellationToken);
+    } 
 }

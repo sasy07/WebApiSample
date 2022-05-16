@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApiSample.Data.Contracts;
 using WebApiSample.Entities;
+using WebApiSample.MyApi.Models;
 using WebApiSample.WebFramework.Api;
 using WebApiSample.WebFramework.Filters;
 
@@ -38,9 +39,19 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ApiResult<User>> Create(User user, CancellationToken cancellationToken)
+    public async Task<ApiResult<User>> Create(UserDto userDto, CancellationToken cancellationToken)
     {
-        await _userRepository.AddAsync(user, cancellationToken);
+        var exists = await _userRepository.TableNoTracking.AnyAsync(p => p.UserName == userDto.UserName);
+        if (exists) return BadRequest("نام کاربری تکراری است"); 
+        
+        var user = new User
+        {
+            Age = userDto.Age,
+            FullName = userDto.FullName,
+            Gender = userDto.Gender,
+            UserName = userDto.UserName
+        };
+        await _userRepository.AddAsync(user,userDto.Password, cancellationToken);
         return Ok(user);
     }
 
