@@ -1,8 +1,11 @@
-﻿using Common;
+﻿using System.Net;
+using Common;
 using Common.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using WebApiSample.WebFramework.Api;
 
@@ -18,37 +21,114 @@ public static class CustomExceptionHandlerMiddlewareExtensions
 
 public class CustomExceptionHandlerMiddleware
 {
-    private readonly RequestDelegate next;
-    private readonly ILogger<CustomExceptionHandlerMiddleware> logger;
+    private readonly RequestDelegate _next;
+    private readonly ILogger<CustomExceptionHandlerMiddleware> _logger;
+    private readonly IHostEnvironment _env;
 
-    public CustomExceptionHandlerMiddleware
-        (RequestDelegate next, ILogger<CustomExceptionHandlerMiddleware> logger)
+    public CustomExceptionHandlerMiddleware(RequestDelegate next, 
+        ILogger<CustomExceptionHandlerMiddleware> logger
+        , IHostEnvironment env)
     {
-        this.next = next;
-        this.logger = logger;
+        _next = next;
+        _logger = logger;
+        _env = env;
     }
 
     public async Task Invoke(HttpContext httpContext)
     {
+        string message = null;
+        HttpStatusCode httpStatusCode = HttpStatusCode.InternalServerError;
+        ApiResultStatusCode apiStatusCode = ApiResultStatusCode.ServerError;
         try
         {
-            await next(httpContext);
+            await _next.Invoke(httpContext);
         }
-        catch (AppException ex)
+        catch (AppException exception)
         {
-            logger.LogError(ex, ex.Message);
-            var apiResult = new ApiResult(false, ex.StatusCode);
-            var json = JsonConvert.SerializeObject(apiResult);
+            _logger.LogError(exception, exception.Message);
+            httpStatusCode = exception.HttpStatusCode;
+            apiStatusCode = exception.ApiStatusCode;
+            if (_env.IsDevelopment())
+            {
+                var dic = new Dictionary<string, string>
+                {
+                    ["Exception"] = exception.Message,
+                    ["StackTrace"] = exception.StackTrace
+                };
+                if (exception.InnerException != null)
+                {
+                    dic.Add("InnerException.Exception", exception.InnerException.Message);
+                    dic.Add("InnerException.StackTrace", exception.InnerException.StackTrace);
+                }
+
+                if (exception.AdditionalData != null)
+                    dic.Add("AdditionalData", JsonConvert.SerializeObject(exception.AdditionalData));
+                message = JsonConvert.SerializeObject(dic);
+            }
+            else
+            {
+                message = exception.Message;
+            }
+
+            await WriteToResponseAsync();
+        }
+        catch (SecurityTokenExpiredException exception)
+        {
+            _logger.LogError(exception, exception.Message);
+            SetUnAuthorizeResponse(exception);
+            await WriteToResponseAsync();
+        }
+        catch (UnauthorizedAccessException exception)
+        {
+            _logger.LogError(exception, exception.Message);
+            SetUnAuthorizeResponse(exception);
+            await WriteToResponseAsync();
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(exception , exception.Message);
+            if (_env.IsDevelopment())
+            {
+                var dic = new Dictionary<string, string>
+                {
+                    ["Exception"] = exception.Message,
+                    ["StackTrace"] = exception.StackTrace
+                };
+                message = JsonConvert.SerializeObject(dic);
+            }
+            await WriteToResponseAsync();
+        }
+
+        async Task WriteToResponseAsync()
+        {
+            if (httpContext.Response.HasStarted)
+                throw new InvalidOperationException("The response has already started, the http status code middleware will not be executed.");
+
+            var result = new ApiResult(false, apiStatusCode, message);
+            var json = JsonConvert.SerializeObject(result);
+
+            httpContext.Response.StatusCode = (int)httpStatusCode;
             httpContext.Response.ContentType = "application/json";
             await httpContext.Response.WriteAsync(json);
         }
-        catch (Exception ex)
+
+        void SetUnAuthorizeResponse(Exception exception)
         {
-            logger.LogError(ex, "خطایی رخ داده است");
-            var apiResult = new ApiResult(false, ApiResultStatusCode.ServerError);
-            var json = JsonConvert.SerializeObject(apiResult);
-            httpContext.Response.ContentType = "application/json";
-            await httpContext.Response.WriteAsync(json);
+            httpStatusCode = HttpStatusCode.Unauthorized;
+            apiStatusCode = ApiResultStatusCode.UnAuthorized;
+
+            if (_env.IsDevelopment())
+            {
+                var dic = new Dictionary<string, string>
+                {
+                    ["Exception"] = exception.Message,
+                    ["StackTrace"] = exception.StackTrace
+                };
+                if (exception is SecurityTokenExpiredException tokenException)
+                    dic.Add("Expires", tokenException.Expires.ToString());
+
+                message = JsonConvert.SerializeObject(dic);
+            }
         }
     }
 }
