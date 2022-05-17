@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using WebApiSample.Data;
 using WebApiSample.Data.Contracts;
 using WebApiSample.Data.Repositories;
+using WebApiSample.WebFramework.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app. UseCustomExceptionHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

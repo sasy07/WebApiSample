@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Common.Exceptions;
+using Microsoft.EntityFrameworkCore;
 using WebApiSample.Common.Utility;
 using WebApiSample.Data.Contracts;
 using WebApiSample.Entities;
 
 namespace WebApiSample.Data.Repositories;
 
-public class UserRepository :Repository<User>,  IUserRepository
+public class UserRepository : Repository<User>, IUserRepository
 {
     public UserRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
@@ -18,9 +19,12 @@ public class UserRepository :Repository<User>,  IUserRepository
             .SingleOrDefaultAsync(cancellationToken);
     }
 
-    public Task AddAsync(User user, string password, CancellationToken cancellationToken)
+    public async Task AddAsync(User user, string password, CancellationToken cancellationToken)
     {
+        var exists = await TableNoTracking.AnyAsync(p => p.UserName == user.UserName);
+        if (exists)
+            throw new BadRequestException("نام کاربری تکراری است");
         user.PasswordHash = SecurityHelper.GetSha256Hash(password);
-        return base.AddAsync(user, cancellationToken);
-    } 
+        await base.AddAsync(user, cancellationToken);
+    }
 }
