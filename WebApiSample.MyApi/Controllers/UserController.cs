@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ElmahCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApiSample.Data.Contracts;
 using WebApiSample.Entities;
@@ -17,10 +18,13 @@ public class UserController : ControllerBase
     #region constructor
 
     private readonly IUserRepository _userRepository;
+    private readonly ILogger<UserController> _logger;
 
-    public UserController(IUserRepository userRepository)
+    public UserController(IUserRepository userRepository, ILogger<UserController> logger)
     {
         _userRepository = userRepository;
+        _logger = logger;
+        _logger.LogError(1, "NLog injected into HomeController");
     }
 
     #endregion
@@ -34,6 +38,7 @@ public class UserController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<ApiResult<User>> Get(int id, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Hello, this is the index!");
         var user = await _userRepository.GetByIdAsync(cancellationToken, id);
         return user != null ? user : NotFound();
     }
@@ -41,7 +46,6 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<ApiResult<User>> Create(UserDto userDto, CancellationToken cancellationToken)
     {
-        
         var user = new User
         {
             Age = userDto.Age,

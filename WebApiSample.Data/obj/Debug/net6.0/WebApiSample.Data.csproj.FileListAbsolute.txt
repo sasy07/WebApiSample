@@ -1,4 +1,5 @@
 G:\workspace\WebApiSample\WebApiSample.Data\bin\Debug\net6.0\WebApiSample.Data.deps.json
+G:\workspace\WebApiSample\WebApiSample.Data\bin\Debug\net6.0\WebApiSample.Data.runtimeconfig.json
 G:\workspace\WebApiSample\WebApiSample.Data\bin\Debug\net6.0\WebApiSample.Data.dll
 G:\workspace\WebApiSample\WebApiSample.Data\bin\Debug\net6.0\WebApiSample.Data.pdb
 G:\workspace\WebApiSample\WebApiSample.Data\bin\Debug\net6.0\WebApiSample.Common.dll
@@ -14,6 +15,5 @@ G:\workspace\WebApiSample\WebApiSample.Data\obj\Debug\net6.0\WebApiSample.Data.c
 G:\workspace\WebApiSample\WebApiSample.Data\obj\Debug\net6.0\WebApiSample.Data.dll
 G:\workspace\WebApiSample\WebApiSample.Data\obj\Debug\net6.0\refint\WebApiSample.Data.dll
 G:\workspace\WebApiSample\WebApiSample.Data\obj\Debug\net6.0\WebApiSample.Data.pdb
-G:\workspace\WebApiSample\WebApiSample.Data\obj\Debug\net6.0\ref\WebApiSample.Data.dll
-G:\workspace\WebApiSample\WebApiSample.Data\bin\Debug\net6.0\WebApiSample.Data.runtimeconfig.json
 G:\workspace\WebApiSample\WebApiSample.Data\obj\Debug\net6.0\WebApiSample.Data.genruntimeconfig.cache
+G:\workspace\WebApiSample\WebApiSample.Data\obj\Debug\net6.0\ref\WebApiSample.Data.dll
