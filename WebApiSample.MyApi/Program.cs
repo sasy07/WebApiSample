@@ -24,7 +24,7 @@ try
 // Add services to the container.
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
     {
-        options.UseSqlServer(builder.Configuration.GetConnectionString("SomeeConnection"));
+        options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection"));
     });
     builder.Services.AddControllers();
 
