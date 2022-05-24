@@ -103,3 +103,4 @@ G:\workspace\WebApiSample\WebApiSample.MyApi\bin\Debug\net6.0\runtimes\win-arm\n
 G:\workspace\WebApiSample\WebApiSample.MyApi\bin\Debug\net6.0\runtimes\win-arm64\native\e_sqlite3.dll
 G:\workspace\WebApiSample\WebApiSample.MyApi\bin\Debug\net6.0\runtimes\win-x64\native\e_sqlite3.dll
 G:\workspace\WebApiSample\WebApiSample.MyApi\bin\Debug\net6.0\runtimes\win-x86\native\e_sqlite3.dll
+G:\workspace\WebApiSample\WebApiSample.MyApi\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll

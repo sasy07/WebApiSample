@@ -1,9 +1,14 @@
-﻿using ElmahCore;
+﻿using System.Security.Claims;
+using Common.Exceptions;
+using ElmahCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebApiSample.Common.Utility;
 using WebApiSample.Data.Contracts;
 using WebApiSample.Entities;
 using WebApiSample.MyApi.Models;
+using WebApiSample.Services.Services;
 using WebApiSample.WebFramework.Api;
 using WebApiSample.WebFramework.Filters;
 
@@ -14,16 +19,19 @@ namespace WebApiSample.MyApi.Controllers;
 [ApiResultFilter]
 public class UserController : ControllerBase
 {
-    
     #region constructor
 
     private readonly IUserRepository _userRepository;
     private readonly ILogger<UserController> _logger;
+    private readonly IJwtService _jwtService;
 
-    public UserController(IUserRepository userRepository, ILogger<UserController> logger)
+    public UserController(IUserRepository userRepository,
+        ILogger<UserController> logger,
+        IJwtService jwtService)
     {
         _userRepository = userRepository;
         _logger = logger;
+        _jwtService = jwtService;
         _logger.LogError(1, "NLog injected into HomeController");
     }
 
@@ -33,7 +41,12 @@ public class UserController : ControllerBase
 
     [HttpGet]
     public async Task<ActionResult<List<User>>> Get(CancellationToken cancellationToken)
-        => Ok(await _userRepository.TableNoTracking.ToListAsync(cancellationToken));
+    {
+        var userName = HttpContext.User.Identity.GetUserName();
+        var userId = HttpContext.User.Identity.GetUserId<int>();
+        var role = HttpContext.User.Identity.FindFirstValue(ClaimTypes.Role);
+        return Ok(await _userRepository.TableNoTracking.ToListAsync(cancellationToken));
+    }
 
     [HttpGet("{id:int}")]
     public async Task<ApiResult<User>> Get(int id, CancellationToken cancellationToken)
@@ -53,12 +66,12 @@ public class UserController : ControllerBase
             Gender = userDto.Gender,
             UserName = userDto.UserName
         };
-        await _userRepository.AddAsync(user,userDto.Password, cancellationToken);
+        await _userRepository.AddAsync(user, userDto.Password, cancellationToken);
         return Ok(user);
     }
 
     [HttpPut]
-    public async Task<ApiResult> Update(int id , User user, CancellationToken cancellationToken)
+    public async Task<ApiResult> Update(int id, User user, CancellationToken cancellationToken)
     {
         var updateUser = await _userRepository.GetByIdAsync(cancellationToken, id);
 
@@ -83,6 +96,14 @@ public class UserController : ControllerBase
         return Ok();
     }
 
+    [AllowAnonymous]
+    [HttpGet("[action]")]
+    public async Task<string> Token(string userName, string password, CancellationToken cancellationToken)
+    {
+        var user = await _userRepository.GetByUserAndPass(userName, password, cancellationToken);
+        if (user == null) throw new BadRequestException("نام کاربری یا رمز عبور اشتباه است .");
+        return _jwtService.Generate(user);
+    }
+
     #endregion
-    
 }
