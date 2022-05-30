@@ -19,6 +19,7 @@ public class UserRepository : Repository<User>, IUserRepository
             .SingleOrDefaultAsync(cancellationToken);
     }
 
+
     public async Task AddAsync(User user, string password, CancellationToken cancellationToken)
     {
         var exists = await TableNoTracking.AnyAsync(p => p.UserName == user.UserName);
@@ -26,5 +27,17 @@ public class UserRepository : Repository<User>, IUserRepository
             throw new BadRequestException("نام کاربری تکراری است");
         user.PasswordHash = SecurityHelper.GetSha256Hash(password);
         await base.AddAsync(user, cancellationToken);
+    }
+
+    public Task UpdateSecurityStampAsync(User user, CancellationToken cancellationToken)
+    {
+        user.SecurityStamp = Guid.NewGuid();
+        return UpdateAsync(user, cancellationToken);
+    }
+
+    public Task UpdateLastLoginDateAsync(User user, CancellationToken cancellationToken)
+    {
+        user.LastLoginDate = DateTimeOffset.Now;
+        return UpdateAsync(user, cancellationToken);
     }
 }

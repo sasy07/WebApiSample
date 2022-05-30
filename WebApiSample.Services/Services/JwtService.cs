@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using Common;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using WebApiSample.Entities;
@@ -21,6 +22,13 @@ public class JwtService : IJwtService
         var secretKey = Encoding.UTF8.GetBytes(_siteSettings.JwtSettings.SecretKey);
         var signingCredentials =
             new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256);
+        
+        //Encryption JWT
+        var encryptionKey = Encoding.UTF8.GetBytes(_siteSettings.JwtSettings.EncryptKey);
+        var encryptionCredentials = new EncryptingCredentials(new SymmetricSecurityKey(encryptionKey),
+            SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
+        
+        
         var claims = _getClaims(user);
         var descriptor = new SecurityTokenDescriptor
         {
@@ -30,7 +38,8 @@ public class JwtService : IJwtService
             NotBefore = DateTime.Now.AddMinutes(0),
             Expires = DateTime.Now.AddHours(1),
             SigningCredentials = signingCredentials,
-            Subject = new ClaimsIdentity(claims)
+            Subject = new ClaimsIdentity(claims),
+            EncryptingCredentials = encryptionCredentials
         };
         
         // JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
@@ -45,13 +54,19 @@ public class JwtService : IJwtService
 
     private IEnumerable<Claim> _getClaims(User user)
     {
+        var securityStampClaimType = new ClaimsIdentityOptions().SecurityStampClaimType; 
         var list = new List<Claim>
         {
             new Claim(ClaimTypes.Name, user.UserName),
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.MobilePhone , "09163357023"),
+            new Claim(securityStampClaimType , user.SecurityStamp.ToString())
         };
         var roles = _getRoles(user);
-        roles.ToList().ForEach(role => { list.Add(new Claim(ClaimTypes.Role, role.Name)); });
+        roles.ToList().ForEach(role =>
+        {
+            list.Add(new Claim(ClaimTypes.Role, role.Name));
+        });
         return list;
     }
 

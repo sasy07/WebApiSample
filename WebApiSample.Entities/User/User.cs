@@ -7,12 +7,14 @@ public class User : BaseEntity
     public User()
     {
         IsActive = true;
+        SecurityStamp = Guid.NewGuid();
     }
 
     public string UserName { get; set; }
     public string PasswordHash { get; set; }
     public string FullName { get; set; }
     public int Age { get; set; }
+    public Guid SecurityStamp { get; set; }
     public GenderType Gender { get; set; }
     public bool IsActive { get; set; }
     public DateTimeOffset? LastLoginDate { get; set; }
