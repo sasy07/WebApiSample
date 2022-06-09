@@ -10,6 +10,7 @@ public class UserDto : IValidatableObject
     [Required] [StringLength(500)] public string Password { get; set; }
 
     [Required] [StringLength(100)] public string FullName { get; set; }
+    [Required] [EmailAddress] public string Email { get; set; }
 
     public int Age { get; set; }
 

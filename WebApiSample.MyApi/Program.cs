@@ -27,11 +27,14 @@ try
     var _siteSetting = builder.Configuration.GetSection(nameof(SiteSettings)).Get<SiteSettings>();
 
     builder.Services.Configure<SiteSettings>(builder.Configuration.GetSection(nameof(SiteSettings)));
-// Add services to the container.
+    // Add services to the container.
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
     {
         options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection"));
     });
+
+    builder.Services.AddCustomIdentity(_siteSetting.IdentitySettings);
+    
     builder.Services.AddControllers(options => options.Filters.Add(new AuthorizeFilter()));
 
     builder.Logging.ClearProviders();

@@ -1,23 +1,24 @@
 ﻿using System.Reflection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebApiSample.Common.Utility;
 using WebApiSample.Entities;
 
 namespace WebApiSample.Data;
 
-public class ApplicationDbContext:DbContext
+public class ApplicationDbContext : IdentityDbContext<User, Role, int> //DbContext
 {
-    public ApplicationDbContext(DbContextOptions options):base(options)
+    public ApplicationDbContext(DbContextOptions options) : base(options)
     {
-        
     }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
         base.OnModelCreating(modelBuilder);
-        
+
         var entitiesAssembly = typeof(IEntity).Assembly;
-        
+
         modelBuilder.RegisterAllEntities<IEntity>(entitiesAssembly);
         modelBuilder.RegisterEntityTypeConfiguration(entitiesAssembly);
         modelBuilder.AddRestrictDeleteBehaviorConvention();
@@ -40,7 +41,7 @@ public class ApplicationDbContext:DbContext
             foreach (var property in properties)
             {
                 var propName = property.Name;
-                var val = (string)property.GetValue(item.Entity, null);
+                var val = (string) property.GetValue(item.Entity, null);
 
                 if (val.HasValue())
                 {
@@ -52,7 +53,7 @@ public class ApplicationDbContext:DbContext
             }
         }
     }
-    
+
     public override int SaveChanges()
     {
         _cleanString();
@@ -65,7 +66,7 @@ public class ApplicationDbContext:DbContext
         return base.SaveChanges(acceptAllChangesOnSuccess);
     }
 
-    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, 
+    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
         CancellationToken cancellationToken = default)
     {
         _cleanString();
@@ -77,5 +78,4 @@ public class ApplicationDbContext:DbContext
         _cleanString();
         return base.SaveChangesAsync(cancellationToken);
     }
-    
 }

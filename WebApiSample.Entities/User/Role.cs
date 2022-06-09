@@ -1,8 +1,9 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
+
 namespace WebApiSample.Entities;
 
-public class Role:BaseEntity
+public class Role:IdentityRole<int>,IEntity
 {
-   public string Name { get; set; }
     public string Description { get; set; }
 }

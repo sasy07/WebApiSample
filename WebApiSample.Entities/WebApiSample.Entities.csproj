@@ -10,4 +10,8 @@
     <ProjectReference Include="..\WebApiSample.Common\WebApiSample.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="6.0.5" />
+  </ItemGroup>
+
 </Project>
